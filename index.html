@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe Haven | Book Your Stay</title>
+    <meta name="description" content="Experience unparalleled luxury at Luxe Haven. Book your dream hotel room today.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">Luxe <span>Haven</span></div>
+        <nav>
+            <ul>
+                <li><a href="#about">The Experience</a></li>
+                <li><a href="#rooms">Rooms & Suites</a></li>
+                <li><a href="#amenities">Amenities</a></li>
+            </ul>
+        </nav>
+        <a href="#booking-section" class="btn-primary">Book Now</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Escape to <br><span>Extraordinary</span></h1>
+            <p>Discover a sanctuary of luxury and tranquility. Your perfect getaway begins here.</p>
+            <a href="#booking-section" class="btn-hero">Reserve Your Stay</a>
+        </div>
+    </section>
+
+    <section id="about" class="features">
+        <div class="feature-item">
+            <div class="feature-icon">✨</div>
+            <h3>Premium Luxury</h3>
+            <p>Experience world-class comfort and exquisite design in every corner.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🍽️</div>
+            <h3>Fine Dining</h3>
+            <p>Indulge in culinary masterpieces crafted by our award-winning chefs.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🌿</div>
+            <h3>Wellness Spa</h3>
+            <p>Rejuvenate your mind, body, and soul in our exclusive spa facilities.</p>
+        </div>
+    </section>
+
+    <section id="rooms" class="rooms-section">
+        <div class="section-title">
+            <h2>Our Suites</h2>
+            <p>Choose your perfect sanctuary. Each room is designed with unmatched elegance.</p>
+        </div>
+        <div class="rooms-grid">
+            <div class="room-card" data-room="1-bedroom" data-count="4">
+                <img src="images/1-bedroom/1.png" alt="1 Bedroom Suite">
+                <div class="room-info">
+                    <h3>1 Bedroom Suite</h3>
+                    <p>Perfect for couples or solo travelers seeking refined comfort and modern amenities.</p>
+                </div>
+            </div>
+            <div class="room-card" data-room="2-bedroom" data-count="5">
+                <img src="images/2-bedroom/1.png" alt="2 Bedroom Suite">
+                <div class="room-info">
+                    <h3>2 Bedroom Suite</h3>
+                    <p>Spacious and elegant, ideal for families or small groups looking for a premium stay.</p>
+                </div>
+            </div>
+            <div class="room-card" data-room="royal-suite" data-count="10">
+                <img src="images/royal-suite/1.png" alt="Royal Suite">
+                <div class="room-info">
+                    <h3>Royal Suite</h3>
+                    <p>Unmatched luxury with breathtaking views, a private lounge, and exquisite decor.</p>
+                </div>
+            </div>
+            <div class="room-card" data-room="vp-suite" data-count="7">
+                <img src="images/vp-suite/1.png" alt="VP Suite">
+                <div class="room-info">
+                    <h3>VP Suite</h3>
+                    <p>The pinnacle of exclusivity, offering the ultimate bespoke experience for our most discerning guests.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking-section" class="booking">
+        <div class="booking-container">
+            <div class="booking-text">
+                <h2>Ready to book your dream stay?</h2>
+                <p>Complete the form to check availability and secure your reservation. Our concierge team is ready to assist you in planning the perfect trip.</p>
+            </div>
+            <div class="booking-form-wrapper">
+                <!-- n8n Form Embed -->
+                <iframe src="https://n8n-97i5.onrender.com/form/977cf7c1-da70-45d9-956c-406513605f68" frameborder="0" width="100%" height="600px" style="border-radius: 12px; overflow: hidden; background: transparent;"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">Luxe <span>Haven</span></div>
+            <p>&copy; 2026 Luxe Haven Hotels. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <div class="modal-gallery">
+                <img id="modal-img" src="" alt="Room image">
+                <a class="prev-img">&#10094;</a>
+                <a class="next-img">&#10095;</a>
+            </div>
+            <div class="modal-thumbnails" id="modal-thumbnails"></div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("image-modal");
+        const modalImg = document.getElementById("modal-img");
+        const closeModal = document.querySelector(".close-modal");
+        const prevBtn = document.querySelector(".prev-img");
+        const nextBtn = document.querySelector(".next-img");
+        const thumbnailsContainer = document.getElementById("modal-thumbnails");
+        
+        let currentRoom = "";
+        let currentCount = 0;
+        let currentIndex = 1;
+
+        document.querySelectorAll('.room-card').forEach(card => {
+            card.addEventListener('click', () => {
+                currentRoom = card.getAttribute('data-room');
+                currentCount = parseInt(card.getAttribute('data-count'));
+                currentIndex = 1;
+                updateModalGallery();
+                modal.style.display = "block";
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = currentIndex > 1 ? currentIndex - 1 : currentCount;
+            updateModalGallery();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = currentIndex < currentCount ? currentIndex + 1 : 1;
+            updateModalGallery();
+        });
+
+        function updateModalGallery() {
+            modalImg.src = `images/${currentRoom}/${currentIndex}.png`;
+            
+            // Build thumbnails
+            thumbnailsContainer.innerHTML = '';
+            for (let i = 1; i <= currentCount; i++) {
+                const thumb = document.createElement('img');
+                thumb.src = `images/${currentRoom}/${i}.png`;
+                thumb.className = i === currentIndex ? 'active' : '';
+                thumb.onclick = () => {
+                    currentIndex = i;
+                    updateModalGallery();
+                };
+                thumbnailsContainer.appendChild(thumb);
+            }
+        }
+    </script>
+</body>
+</html>

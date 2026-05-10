@@ -1,0 +1,65 @@
+/* Custom CSS for n8n form to match Luxe Haven theme */
+/* Inject this into your n8n Form node under "Custom CSS" */
+
+:root {
+    --font-family: 'Outfit', sans-serif !important;
+
+    /* Backgrounds */
+    --color-background: transparent !important;
+    --color-card-bg: transparent !important;
+    --color-card-border: rgba(255, 255, 255, 0.05) !important;
+    --box-shadow-card: none !important;
+
+    /* Text */
+    --color-header: #F5F5F5 !important;
+    --color-label: #F5F5F5 !important;
+    --color-link: #D4AF37 !important;
+    --color-html-text: #A0A0A0 !important;
+
+    /* Inputs */
+    --color-input-bg: rgba(255, 255, 255, 0.05) !important;
+    --color-input-border: rgba(255, 255, 255, 0.1) !important;
+    --color-input-text: #F5F5F5 !important;
+    --color-focus-border: #D4AF37 !important;
+    --color-required: #D4AF37 !important;
+
+    /* Submit Button */
+    --color-submit-btn-bg: #D4AF37 !important;
+    --color-submit-btn-text: #1A1A1D !important;
+}
+
+/* Force border-radius and fonts globally */
+.form-container, .card, form, input, textarea, button, select {
+    font-family: 'Outfit', sans-serif !important;
+}
+
+/* Input Fields */
+input, textarea, select {
+    border-radius: 8px !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+input:focus, textarea:focus, select:focus {
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Submit Button Hover Effects */
+button[type="submit"] {
+    border-radius: 30px !important;
+    padding: 12px 30px !important;
+    font-weight: 600 !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease !important;
+}
+
+button[type="submit"]:hover {
+    background-color: #F5D061 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2) !important;
+    color: #1A1A1D !important;
+}
+
+/* Hide card borders and padding to seamlessly embed */
+.card {
+    border: none !important;
+    box-shadow: none !important;
+}
